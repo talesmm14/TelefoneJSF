@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>Cadastro de Usuário</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+	<center>
+		<h1>Cadastro de Usuário</h1>
+
+		<h:messages style="color:red" />
+		<h:form>
+			<h:panelGrid columns="2">
+
+				<h:outputLabel value="Id: " />
+				<h:inputText value="#{usuarioController.usuario.id}"
+					disabled="#{usuarioController.usuario.id != null}" />
+
+				<h:outputLabel value="Nome: " />
+				<h:inputText value="#{usuarioController.usuario.nome}" />
+
+				<h:outputLabel value="Login: " />
+				<h:inputText value="#{usuarioController.usuario.login}" />
+
+				<h:outputLabel value="DDD: " />
+				<h:inputText value="#{usuarioController.telefone.ddd}" 
+				disabled="#{usuarioController.telefone.ddd != null}"/>
+
+				<h:outputLabel value="Telefone: " />
+				<h:inputText value="#{usuarioController.telefone.telefone}"
+				disabled="#{usuarioController.telefone.telefone != null}" />
+
+				<h:outputLabel value="Senha: " />
+				<h:inputSecret value="#{usuarioController.usuario.senha}" />
+
+				<h:commandButton value="Incluir Telefone"
+					disabled="#{usuarioController.telefone.ddd != null}"
+					actionListener="#{usuarioController.incluirTelefone}" />
+
+				<h:outputLabel value="Perfil de Usuário: " />
+				<h:selectOneMenu value="#{usuarioController.usuario.perfil}">
+					<f:selectItem itemLabel="Selecione ..." />
+					<f:selectItems value="#{usuarioController.listaPerfil}"
+						var="perfil" itemLabel="#{perfil.label}" itemValue="#{perfil}" />
+				</h:selectOneMenu>
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="4">
+				<h:commandButton value="Incluir"
+					disabled="#{usuarioController.usuario.id != null}"
+					actionListener="#{usuarioController.incluir}" />
+				<h:commandButton value="Alterar"
+					disabled="#{usuarioController.usuario.id == null}"
+					action="#{usuarioController.alterar}" />
+				<h:commandButton value="Excluir"
+					disabled="#{usuarioController.usuario.id == null}"
+					actionListener="#{usuarioController.excluir}" />
+				<h:commandButton value="Limpar"
+					actionListener="#{usuarioController.limpar}" />
+
+			</h:panelGrid>
+		</h:form>
+
+		<h:form>
+			<h:dataTable value="#{usuarioController.usuario.listaTelefones}"
+				var="tel">
+				<h:column>
+					<f:facet name="header">DDD</f:facet>
+					<h:outputLabel value="#{tel.ddd}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Telefone</f:facet>
+					<h:outputLabel value="#{tel.telefone}" />
+				</h:column>
+			</h:dataTable>
+
+		</h:form>
+
+		<h:form>
+			<h:dataTable value="#{usuarioController.listaUsuario}" var="obj">
+				<h:column>
+					<f:facet name="header">Id</f:facet>
+					<h:outputLabel value="#{obj.id}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:commandLink value="#{obj.nome}"
+						actionListener="#{usuarioController.editar(obj)}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Login</f:facet>
+					<h:commandLink value="#{obj.login}"
+						actionListener="#{usuarioController.editar(obj)}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Senha</f:facet>
+					<h:outputLabel value="#{obj.senha}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Perfil</f:facet>
+					<h:outputLabel value="#{obj.perfil.label}" />
+				</h:column>
+			</h:dataTable>
+		</h:form>
+
+
+
+	</center>
+</h:body>
+</html>
