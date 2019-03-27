@@ -48,7 +48,8 @@ public class UsuarioController implements Serializable {
 			listaUsuario = new ArrayList<Usuario>();
 			listaTelefone = new ArrayList<Telefone>();
 			listaTelefone.add(new Telefone("63","90239432"));
-			listaUsuario.add(new Usuario(1, "Joao", "joao", "123", Perfil.FUNCIONARIO,listaTelefone));;
+			listaUsuario.add(new Usuario(1, "Joao", "joao", "123", Perfil.FUNCIONARIO,listaTelefone));
+			listaTelefone = null;
 		}
 		return listaUsuario;
 	}
@@ -114,8 +115,16 @@ public class UsuarioController implements Serializable {
 	}
 	
 	public void incluirTelefone() {
-		//listaTelefone = new ArrayList<Telefone>();
-		//listaTelefone.add(new Telefone(telefone.getDdd(),telefone.getTelefone()));
-		getListaTelefone().add(getTelefone());
+		int index = getListaUsuario().indexOf(getUsuario());
+		getListaUsuario().set(index, getUsuario());
+		
+		getUsuario().getListaTelefones().add(new Telefone(telefone.getDdd(),telefone.getTelefone()));
+		if (index != -1) {
+			// alterando a posicao da lista com um novo usuario
+			getListaUsuario().set(index, getUsuario());
+			limpar();
+		}
+		listaTelefone = null;
+		telefone = null;
 	}
 }
