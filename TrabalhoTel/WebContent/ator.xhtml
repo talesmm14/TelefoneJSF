@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>Cadastro de Ator</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+	<center>
+		<h1>Cadastro de Pessoal do filme!!</h1>
+
+		<h:messages style="color:red" />
+		<h:form>
+			<h:panelGrid columns="2">
+
+				<h:outputLabel value="Id: " />
+				<h:inputText value="#{atorController.ator.id}"
+					disabled="#{atorController.ator.id != null}" />
+
+				<h:outputLabel value="Nome: " />
+				<h:inputText value="#{atorController.ator.nome}" />
+
+				<h:outputLabel value="Sobrenome: " />
+				<h:inputText value="#{atorController.ator.sobrenome}" />
+
+				<h:outputLabel value="DDD: " />
+				<h:inputText value="#{atorController.telefone.ddd}" 
+				disabled="#{atorController.telefone.ddd != null}"/>
+
+				<h:outputLabel value="Telefone: " />
+				<h:inputText value="#{atorController.telefone.telefone}"
+				disabled="#{atorController.telefone.telefone != null}" />
+
+				<h:outputLabel value="Filme: " />
+				<h:inputText value="#{atorController.ator.filme}" />
+
+				<h:commandButton value="Incluir novo Telefone"
+					actionListener="#{atorController.incluirTelefone}"
+					disabled="#{atorController.ator.id == null}" />
+
+				<h:outputLabel value="Papel: " />
+				<h:selectOneMenu value="#{atorController.ator.perfil}">
+					<f:selectItem itemLabel="Selecione ..." />
+					<f:selectItems value="#{atorController.listaPerfil}"
+						var="papel" itemLabel="#{papel.label}" itemValue="#{papel}" />
+				</h:selectOneMenu>
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="4">
+				<h:commandButton value="Incluir"
+					disabled="#{atorController.ator.id != null}"
+					actionListener="#{atorController.incluir}" />
+				<h:commandButton value="Alterar"
+					disabled="#{atorController.ator.id == null}"
+					action="#{atorController.alterar}" />
+				<h:commandButton value="Excluir"
+					disabled="#{atorController.ator.id == null}"
+					actionListener="#{atorController.excluir}" />
+				<h:commandButton value="Limpar"
+					actionListener="#{atorController.limpar}" />
+
+			</h:panelGrid>
+		</h:form>
+
+		<h:form>
+			<h:dataTable value="#{atorController.ator.listaTelefones}"
+				var="tel">
+				<h:column>
+					<f:facet name="header">DDD:</f:facet>
+					<h:outputLabel value="#{tel.ddd}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Telefone:</f:facet>
+					<h:outputLabel value="#{tel.telefone}" />
+				</h:column>
+			</h:dataTable>
+
+		</h:form>
+
+		<h:form>
+			<h:dataTable value="#{atorController.listaUsuario}" var="obj">
+				<h:column>
+					<f:facet name="header">Id</f:facet>
+					<h:outputLabel value="#{obj.id}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:commandLink value="#{obj.nome}"
+						actionListener="#{atorController.editar(obj)}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Sobrenome</f:facet>
+					<h:commandLink value="#{obj.sobrenome}"
+						actionListener="#{atorController.editar(obj)}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Filme</f:facet>
+					<h:outputLabel value="#{obj.filme}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Papel</f:facet>
+					<h:outputLabel value="#{obj.perfil.label}" />
+				</h:column>
+			</h:dataTable>
+		</h:form>
+
+
+
+	</center>
+</h:body>
+</html>

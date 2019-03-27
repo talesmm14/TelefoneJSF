@@ -3,12 +3,12 @@ package br.unitins.trabalhotel.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Usuario extends DefaultEntity {
+public class Ator extends DefaultEntity {
 
 	private String nome;
-	private String login;
-	private String senha;
-	private Perfil perfil;
+	private String sobrenome;
+	private String filme;
+	private Papel papel;
 	private List<Telefone> listaTelefones;
 
 	public List<Telefone> getListaTelefones() {
@@ -22,17 +22,17 @@ public class Usuario extends DefaultEntity {
 		this.listaTelefones = listaTelefones;
 	}
 
-	public Usuario() {
+	public Ator() {
 
 	}
 
-	public Usuario(Integer id, String nome, String login, String senha, Perfil perfil, List<Telefone> listaTelefones) {
+	public Ator(Integer id, String nome, String sobrenome, String filme, Papel papel, List<Telefone> listaTelefones) {
 		super();
 		setId(id);
 		this.nome = nome;
-		this.login = login;
-		this.senha = senha;
-		this.perfil = perfil;
+		this.sobrenome = sobrenome;
+		this.filme = filme;
+		this.papel = papel;
 		this.listaTelefones = listaTelefones;
 	}
 
@@ -44,28 +44,30 @@ public class Usuario extends DefaultEntity {
 		this.nome = nome;
 	}
 
-	public String getLogin() {
-		return login;
+	
+
+	public String getSobrenome() {
+		return sobrenome;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getFilme() {
+		return filme;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setFilme(String filme) {
+		this.filme = filme;
 	}
 
-	public Perfil getPerfil() {
-		return perfil;
+	public Papel getPerfil() {
+		return papel;
 	}
 
-	public void setPerfil(Perfil perfil) {
-		this.perfil = perfil;
+	public void setPerfil(Papel papel) {
+		this.papel = papel;
 	}
 	
 	

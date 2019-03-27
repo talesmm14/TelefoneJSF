@@ -1,16 +1,16 @@
 package br.unitins.trabalhotel.model;
 
-public enum Perfil {
+public enum Papel {
 	
-	ADMINISTRADOR(1, "Administrador"), 
-	GERENTE(2, "Gerente"), 
-	CLIENTE(3, "Cliente"), 
-	FUNCIONARIO(4, "Funcionário");
+	PRINCIPAL(1, "Principal"), 
+	VILAO(2, "Vilão"), 
+	FIGURANTE(3, "Figurante"), 
+	SECUNDARIO(4, "Secundario");
 
 	private int value;
 	private String label;
 	
-	Perfil(int value, String label) {
+	Papel(int value, String label) {
 		this.value = value;
 		this.label = label;
 	}
