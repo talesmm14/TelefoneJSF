@@ -35,8 +35,9 @@
 				<h:outputLabel value="Senha: " />
 				<h:inputSecret value="#{usuarioController.usuario.senha}" />
 
-				<h:commandButton value="Incluir Telefone"
-					actionListener="#{usuarioController.incluirTelefone}" />
+				<h:commandButton value="Incluir novo Telefone"
+					actionListener="#{usuarioController.incluirTelefone}"
+					disabled="#{usuarioController.usuario.id == null}" />
 
 				<h:outputLabel value="Perfil de Usuário: " />
 				<h:selectOneMenu value="#{usuarioController.usuario.perfil}">

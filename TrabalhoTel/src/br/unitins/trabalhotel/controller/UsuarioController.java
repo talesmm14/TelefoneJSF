@@ -17,14 +17,13 @@ import br.unitins.trabalhotel.model.Usuario;
 public class UsuarioController implements Serializable {
 
 	private static final long serialVersionUID = -8172260296010703261L;
-	
+
 	private Usuario usuario;
 	private Telefone telefone;
-	
+
 	private List<Usuario> listaUsuario;
 	private List<Telefone> listaTelefone;
-	
-	
+
 	public List<Telefone> getListaTelefone() {
 		return listaTelefone;
 	}
@@ -47,13 +46,13 @@ public class UsuarioController implements Serializable {
 		if (listaUsuario == null) {
 			listaUsuario = new ArrayList<Usuario>();
 			listaTelefone = new ArrayList<Telefone>();
-			listaTelefone.add(new Telefone("63","90239432"));
-			listaUsuario.add(new Usuario(1, "Joao", "joao", "123", Perfil.FUNCIONARIO,listaTelefone));
+			listaTelefone.add(new Telefone("63", "90239432"));
+			listaUsuario.add(new Usuario(1, "Joao", "joao", "123", Perfil.FUNCIONARIO, listaTelefone));
 			listaTelefone = null;
 		}
 		return listaUsuario;
 	}
-	
+
 	public Perfil[] getListaPerfil() {
 		return Perfil.values();
 	}
@@ -67,30 +66,35 @@ public class UsuarioController implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
+
 	public void editar(Usuario usuario) {
-		setUsuario((Usuario)usuario.getClone());
+		setUsuario((Usuario) usuario.getClone());
 	}
-	
+
 	public void incluir() {
 		// validacao de senha no servidor
-		if (getUsuario().getSenha() == null || 
-			getUsuario().getSenha().trim().equals("") ) {
+		if (getUsuario().getSenha() == null || getUsuario().getSenha().trim().equals("")) {
 			Util.addMessageError("A senha deve ser informada.");
 			return;
 		}
+		if ((getTelefone().getDdd() == null || getTelefone().getDdd().trim().equals(""))
+				|| (getTelefone().getTelefone() == null || getTelefone().getTelefone().trim().equals(""))) {
+			getUsuario().getListaTelefones().add(new Telefone(telefone.getDdd(), telefone.getTelefone()));
+		}
 		getListaUsuario().add(getUsuario());
 		limpar();
+		listaTelefone = null;
+		telefone = null;
+
 	}
-	
-	public void alterar() {	
+
+	public void alterar() {
 		// validacao de senha no servidor
-		if (getUsuario().getSenha() == null || 
-				getUsuario().getSenha().trim().equals("") ) {
-				Util.addMessageError("A senha deve ser informada.");
-				return;
+		if (getUsuario().getSenha() == null || getUsuario().getSenha().trim().equals("")) {
+			Util.addMessageError("A senha deve ser informada.");
+			return;
 		}
-		
+
 		// obtendo o indice (posicao da lista)
 		int index = getListaUsuario().indexOf(getUsuario());
 		System.out.println(getUsuario().getId());
@@ -99,26 +103,30 @@ public class UsuarioController implements Serializable {
 			getListaUsuario().set(index, getUsuario());
 			limpar();
 		}
-			
+
 	}
-	
+
 	public void excluir() {
 		int index = getListaUsuario().indexOf(getUsuario());
 		getListaUsuario().remove(index);
 		if (index != -1)
 			limpar();
 	}
-	
+
 	public void limpar() {
 		usuario = null;
 		telefone = null;
 	}
-	
+
 	public void incluirTelefone() {
+		if ((getTelefone().getDdd() == null || getTelefone().getDdd().trim().equals(""))
+				|| (getTelefone().getTelefone() == null || getTelefone().getTelefone().trim().equals(""))) {
+			return;
+		}
 		int index = getListaUsuario().indexOf(getUsuario());
 		getListaUsuario().set(index, getUsuario());
-		
-		getUsuario().getListaTelefones().add(new Telefone(telefone.getDdd(),telefone.getTelefone()));
+
+		getUsuario().getListaTelefones().add(new Telefone(telefone.getDdd(), telefone.getTelefone()));
 		if (index != -1) {
 			// alterando a posicao da lista com um novo usuario
 			getListaUsuario().set(index, getUsuario());
