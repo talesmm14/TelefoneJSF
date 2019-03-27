@@ -119,8 +119,8 @@ public class UsuarioController implements Serializable {
 	}
 
 	public void incluirTelefone() {
-		if ((getTelefone().getDdd() == null || getTelefone().getDdd().trim().equals(""))
-				|| (getTelefone().getTelefone() == null || getTelefone().getTelefone().trim().equals(""))) {
+		if ((getTelefone().getDdd() == null)
+				|| (getTelefone().getTelefone() == null)) {
 			return;
 		}
 		int index = getListaUsuario().indexOf(getUsuario());
