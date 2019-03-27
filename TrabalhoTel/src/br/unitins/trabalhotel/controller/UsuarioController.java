@@ -25,6 +25,14 @@ public class UsuarioController implements Serializable {
 	private List<Telefone> listaTelefone;
 	
 	
+	public List<Telefone> getListaTelefone() {
+		return listaTelefone;
+	}
+
+	public void setListaTelefone(List<Telefone> listaTelefone) {
+		this.listaTelefone = listaTelefone;
+	}
+
 	public Telefone getTelefone() {
 		if (telefone == null)
 			telefone = new Telefone();
@@ -106,6 +114,8 @@ public class UsuarioController implements Serializable {
 	}
 	
 	public void incluirTelefone() {
-		listaTelefone.add(new Telefone(telefone.getDdd(),telefone.getTelefone()));
+		//listaTelefone = new ArrayList<Telefone>();
+		//listaTelefone.add(new Telefone(telefone.getDdd(),telefone.getTelefone()));
+		getListaTelefone().add(getTelefone());
 	}
 }
