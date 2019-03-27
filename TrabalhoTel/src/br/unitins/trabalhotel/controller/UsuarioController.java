@@ -38,6 +38,7 @@ public class UsuarioController implements Serializable {
 	public List<Usuario> getListaUsuario() {
 		if (listaUsuario == null) {
 			listaUsuario = new ArrayList<Usuario>();
+			listaTelefone = new ArrayList<Telefone>();
 			listaTelefone.add(new Telefone("63","90239432"));
 			listaUsuario.add(new Usuario(1, "Joao", "joao", "123", Perfil.FUNCIONARIO,listaTelefone));;
 		}
@@ -69,7 +70,6 @@ public class UsuarioController implements Serializable {
 			Util.addMessageError("A senha deve ser informada.");
 			return;
 		}
-		listaTelefone.add(new Telefone(telefone.getDdd(),telefone.getTelefone()));
 		getListaUsuario().add(getUsuario());
 		limpar();
 	}

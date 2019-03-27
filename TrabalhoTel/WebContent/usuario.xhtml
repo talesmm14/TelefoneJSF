@@ -29,7 +29,8 @@
 				disabled="#{usuarioController.telefone.ddd != null}"/>
 
 				<h:outputLabel value="Telefone: " />
-				<h:inputText value="#{usuarioController.telefone.telefone}"/>
+				<h:inputText value="#{usuarioController.telefone.telefone}"
+				disabled="#{usuarioController.telefone.telefone != null}" />
 
 				<h:outputLabel value="Senha: " />
 				<h:inputSecret value="#{usuarioController.usuario.senha}" />
